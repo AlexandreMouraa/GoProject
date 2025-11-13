@@ -21,10 +21,6 @@ type Address struct {
 		Pincode json.Number
 	}
 
-
-
-
-
 func main() {
 
 	dir := "./"
@@ -49,13 +45,27 @@ func main() {
 			Age: value.Age,
 			Contact: value.Contact,
 			Company: value.Company,
-			Address: Address{'City': value.Address.City, 'State': value.Address.State, 'Country': value.Address.Country, 'Pincode': value.Address.Pincode
+			Address: Address{ City: value.Address.City, State: value.Address.State, Country: value.Address.Country, Pincode: value.Address.Pincode
 		}
 	)
 	}
-
-
 	
+	records, err := db.ReadAll("users")
+	if err != nil {
+		fmt.Println("Error", err)
+	}
+	fmt.Println(records)
 
+	allusers := []User{
+
+	}
+
+	for _, f := range records {
+		employeeFound := User{}
+		if err := json.Unmarchal([]byte(f), &employeeFound); err != nil {
+			fmt.Println("Error", err)
+		}
+		allusers = append(allusers, employeeFound)
+	}
 
 }
