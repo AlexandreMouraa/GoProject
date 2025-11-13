@@ -4,7 +4,61 @@ import (
 	"fmt"
 	"os"
 	"encoding/json"
+	"sync"
+	"path/filepath"
+	"github.com/jcelliott/lumber"
 )
+
+const Version = "1.0.0"
+
+type (
+	Logger interface {
+		Fatal(string, ...interface{})
+		Error(string, ...interface{})
+		Warning(string, ...interface{})
+		Info(string, ...interface{})
+		Debug(string, ...interface{})
+		Trace(string, ...interface{})
+	}
+
+	Driver struct {
+		mutex sync.Mutex
+		mutexes map[string]*sync.Mutex
+		dir string
+		log logger
+	}
+)
+
+type Options struct {
+	Logger 
+}
+
+
+func New(dir string, options *Options)(*Driver, error){
+	dir = file.path.Clean(dir)
+	opts := Options{}
+
+}
+
+func (d *Driver) Write() error{
+
+}
+
+func (d *Driver) Read () error {
+
+}
+
+func (d *Driver) ReadAll()(){
+
+}
+
+func (d *Driver) Delete () error {
+
+}
+
+func (d *Driver) getOrCreateMutex () *synx.Mutex {
+	
+}
 
 type User struct {
 		Name string
@@ -67,5 +121,19 @@ func main() {
 		}
 		allusers = append(allusers, employeeFound)
 	}
+
+	fmt.Println((allusers))
+
+
+	//if err := db.Delete("user," "john") err != nil {
+	//	fmt.Println("Error", err)
+	//}
+
+//	if err := db.Delete("user", ""); err != nil {
+//		fmt.Println("Error", err)
+//	}
+
+
+
 
 }
